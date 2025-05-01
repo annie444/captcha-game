@@ -1,0 +1,15 @@
+use bevy::prelude::*;
+mod pet;
+mod supplies;
+mod world;
+
+fn main() {
+    App::new()
+        .add_plugins((DefaultPlugins, MeshPickingPlugin))
+        .add_systems(
+            Startup,
+            (world::make_world, (pet::make_pet, supplies::make_supplies)).chain(),
+        )
+        .add_systems(Update, supplies::move_back)
+        .run();
+}

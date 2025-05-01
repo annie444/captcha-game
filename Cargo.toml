@@ -1,0 +1,23 @@
+[package]
+name = "captcha-game"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bevy = "0.16.0"
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.release]
+codegen-units = 1
+lto = "thin"
+
+# Optimize for size in the wasm-release profile to reduce load times and bandwidth usage on web.
+[profile.wasm-release]
+inherits = "release"
+opt-level = "z"
+strip = "debuginfo"
